@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="pseudolocalizer" default="dist" basedir=".">
+
+  <property name="version" value="0.1"/>
+
+  <path id="src">
+    <pathelement location="java" />
+  </path>
+
+  <path id="bin">
+    <pathelement location="bin" />
+  </path>
+
+  <path id="tests">
+    <pathelement location="javatests" />
+  </path>
+
+  <path id="testbin">
+    <pathelement location="testbin" />
+  </path>
+
+  <path id="deps">
+    <pathelement location="lib/htmlparser/2.0-SNAPSHOT/filterbuilder.jar" />
+    <pathelement location="lib/htmlparser/2.0-SNAPSHOT/htmllexer.jar" />
+    <pathelement location="lib/htmlparser/2.0-SNAPSHOT/htmlparser.jar" />
+    <pathelement location="lib/htmlparser/2.0-SNAPSHOT/sitecapturer.jar" />
+    <pathelement location="lib/htmlparser/2.0-SNAPSHOT/thumbelina.jar" />
+  </path>
+
+  <path id="testdeps">
+    <pathelement location="lib/junit/4.8.2/junit-4.8.2.jar" />
+  </path>
+
+  <target name="compile" description="Compile java source">
+    <mkdir dir="bin"/>
+    <javac srcdir="java" includes="**" encoding="utf-8"
+      destdir="bin" source="1.5" target="1.5" nowarn="true"
+      debug="true" debuglevel="lines,vars,source">
+      <classpath>
+        <path refid="deps" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="compiletests" depends="compile" description="Compile tests">
+    <mkdir dir="testbin"/>
+    <javac srcdir="javatests" includes="**" encoding="utf-8"
+      destdir="testbin" source="1.5" target="1.5" nowarn="true"
+      debug="true" debuglevel="lines,vars,source">
+      <classpath>
+        <path refid="bin" />
+        <path refid="deps" />
+        <path refid="testdeps" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="binjar, srcjar, docjar, clean"
+    description="Produce distribution jars"/>
+
+  <target name="binjar" depends="compile" description="Produce distro jar">
+    <jar destfile="pseudolocalizer-${version}.jar" filesonly="false"
+      index="true" basedir="bin"/>
+  </target>
+
+  <target name="srcjar" description="Produce distro src jar">
+    <jar destfile="pseudolocalizer-${version}-src.jar" filesonly="false"
+      index="true" basedir="java" includes="**/*.java"/>
+  </target>
+
+  <target name="docjar" depends="doc" description="Produce distro doc jar">
+    <zip destfile="pseudolocalizer-${version}-doc.zip" filesonly="false"
+      basedir="javadoc"/>
+  </target>
+
+  <target name="clean"
+      description="Remove non-distribution files from building">
+    <delete dir="bin" failonerror="false"/>
+    <delete dir="testbin" failonerror="false"/>
+    <delete dir="javadoc" failonerror="false"/>
+    <delete dir="test-reports" failonerror="false"/>
+  </target>
+
+  <target name="realclean" depends="clean" description="Remove all files from building">
+    <delete file="pseudolocalizer-${version}.jar"/>
+    <delete file="pseudolocalizer-${version}-src.jar"/>
+    <delete file="pseudolocalizer-${version}-doc.zip"/>
+  </target>
+
+  <target name="doc" description="Build javadocs">
+    <javadoc destdir="javadoc" author="false" version="false"
+      sourcepath="java">
+      <doctitle><![CDATA[<h1>Google Pseudolocalizer
+          ${version}</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2011 Google, Inc.  All Rights
+          Reserved</i>]]></bottom>
+      <classpath>
+        <path refid="deps" />
+      </classpath>
+    </javadoc>
+  </target>
+
+  <target name="test" depends="compiletests" description="Run tests">
+    <mkdir dir="test-reports"/>
+    <sequential>
+      <junit dir="test-reports" fork="yes" printsummary="yes" failureproperty="junit.failure">
+        <sysproperty key="java.awt.headless" value="true" />
+        <classpath>
+          <path refid="bin" />
+          <path refid="testbin" />
+          <path refid="deps" />
+          <path refid="testdeps" />
+        </classpath>
+        <formatter type="plain" />
+        <formatter type="xml" />
+
+        <batchtest todir="test-reports">
+          <fileset dir="testbin" includes="**/AllTests.class" />
+        </batchtest>
+      </junit>
+      <fail message="One or more junit tests failed" if="junit.failure" status="2" />
+    </sequential>
+  </target>
+</project>
