@@ -364,7 +364,11 @@ public class PseudolocalizationPipeline {
    */
   public static synchronized PseudolocalizationPipeline getVariantPipeline(
       Map<String, String> options, boolean preserveHtml, String variant) {
-    String[] pipeline = variantRegistry.get(variant.toLowerCase(Locale.ENGLISH));
+    variant = variant.toLowerCase(Locale.ENGLISH);
+    String[] pipeline = variantRegistry.get(variant);
+    if (pipeline == null && variant.startsWith("x-")) {
+      pipeline = variantRegistry.get(variant.substring(2));
+    }
     if (pipeline == null) {
       return null;
     }
