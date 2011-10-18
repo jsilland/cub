@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="pseudolocalizer" default="dist" basedir=".">
+<project name="pseudolocalization" default="dist" basedir=".">
 
-  <property name="version" value="0.1"/>
+  <property name="version" value="0.2"/>
 
   <path id="src">
     <pathelement location="java" />
@@ -55,22 +55,40 @@
     </javac>
   </target>
 
-  <target name="dist" depends="binjar, srcjar, docjar, clean"
+  <target name="dist" depends="binjar, srcjar, docjar, depsjar, clean"
     description="Produce distribution jars"/>
 
   <target name="binjar" depends="compile" description="Produce distro jar">
-    <jar destfile="pseudolocalizer-${version}.jar" filesonly="false"
-      index="true" basedir="bin"/>
+    <jar destfile="pseudolocalization-${version}.jar" filesonly="false"
+        index="true" basedir="bin">
+      <manifest>
+        <attribute name="Main-Class"
+            value="com.google.i18n.pseudolocalization.tool.Pseudolocalizer"/>
+        <attribute name="Class-Path"
+          value="pseudolocalization-${version}-deps.jar"/>
+      </manifest>
+    </jar>
   </target>
 
   <target name="srcjar" description="Produce distro src jar">
-    <jar destfile="pseudolocalizer-${version}-src.jar" filesonly="false"
-      index="true" basedir="java" includes="**/*.java"/>
+    <jar destfile="pseudolocalization-${version}-src.jar" filesonly="false"
+        index="true" basedir="java" includes="**/*.java"/>
+  </target>
+
+  <target name="depsjar" description="Produce distro deps jar">
+    <jar destfile="pseudolocalization-${version}-deps.jar" filesonly="false"
+        index="true">
+      <zipfileset src="lib/htmlparser/2.0-SNAPSHOT/filterbuilder.jar" />
+      <zipfileset src="lib/htmlparser/2.0-SNAPSHOT/htmllexer.jar" />
+      <zipfileset src="lib/htmlparser/2.0-SNAPSHOT/htmlparser.jar" />
+      <zipfileset src="lib/htmlparser/2.0-SNAPSHOT/sitecapturer.jar" />
+      <zipfileset src="lib/htmlparser/2.0-SNAPSHOT/thumbelina.jar" />
+    </jar>
   </target>
 
   <target name="docjar" depends="doc" description="Produce distro doc jar">
-    <zip destfile="pseudolocalizer-${version}-doc.zip" filesonly="false"
-      basedir="javadoc"/>
+    <zip destfile="pseudolocalization-${version}-doc.zip" filesonly="false"
+        basedir="javadoc"/>
   </target>
 
   <target name="clean"
@@ -82,9 +100,9 @@
   </target>
 
   <target name="realclean" depends="clean" description="Remove all files from building">
-    <delete file="pseudolocalizer-${version}.jar"/>
-    <delete file="pseudolocalizer-${version}-src.jar"/>
-    <delete file="pseudolocalizer-${version}-doc.zip"/>
+    <delete file="pseudolocalization-${version}.jar"/>
+    <delete file="pseudolocalization-${version}-src.jar"/>
+    <delete file="pseudolocalization-${version}-doc.zip"/>
   </target>
 
   <target name="doc" description="Build javadocs">

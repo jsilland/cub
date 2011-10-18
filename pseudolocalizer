@@ -1,0 +1,12 @@
+#!/bin/sh
+DIR=`dirname $0`
+VERS=0.2
+JAR=$DIR/pseudolocalization-$VERS.jar
+DEPS=$DIR/pseudolocalization-$VERS-deps.jar
+
+if [ ! -r $JAR ]
+then
+  (cd $DIR && ant dist)
+fi
+
+exec java -cp $JAR:$DEPS com.google.i18n.pseudolocalization.tool.Pseudolocalizer "$@"

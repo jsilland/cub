@@ -37,7 +37,8 @@ import java.util.Set;
 /**
  * Run a pseudolocalization pipeline on a set of input files.
  * <p>
- * See {@link PseudolocalizerArguments#printUsage()} for command-line usage.
+ * See {@link Pseudolocalizer.PseudolocalizerArguments#printUsage()} for
+ * command-line usage.
  */
 public class Pseudolocalizer {
 
