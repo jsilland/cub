@@ -22,6 +22,7 @@ import com.google.i18n.pseudolocalization.message.MessageFragment;
 import com.google.i18n.pseudolocalization.message.TextFragment;
 import com.google.i18n.pseudolocalization.message.VisitorContext;
 
+import org.htmlparser.Attribute;
 import org.htmlparser.Parser;
 import org.htmlparser.Tag;
 import org.htmlparser.Text;
@@ -29,7 +30,10 @@ import org.htmlparser.util.ParserException;
 import org.htmlparser.visitors.NodeVisitor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,6 +52,19 @@ public class HtmlPreserver extends DefaultVisitor implements PseudolocalizationM
   private static final Pattern ENTITY_PATTERN = Pattern.compile(
       "&((#\\d+)|(#[xX][a-fA-F0-9]+)|(\\w+));");
 
+  private static final Set<String> LOCALIZABLE_ATTRIBUTES;
+
+  static {
+    LOCALIZABLE_ATTRIBUTES = new HashSet<String>();
+    // TODO: some automated way of generating this list
+    LOCALIZABLE_ATTRIBUTES.add("alt");
+    LOCALIZABLE_ATTRIBUTES.add("title");
+    LOCALIZABLE_ATTRIBUTES.add("button/value");
+    LOCALIZABLE_ATTRIBUTES.add("input/value");
+    LOCALIZABLE_ATTRIBUTES.add("option/label");
+    LOCALIZABLE_ATTRIBUTES.add("optgroup/label");
+  }
+
   public static void register() {
     PseudolocalizationPipeline.registerMethodClass("html", HtmlPreserver.class);
   }
@@ -58,6 +75,11 @@ public class HtmlPreserver extends DefaultVisitor implements PseudolocalizationM
     Parser parser = Parser.createParser(text.getText(), "UTF-8");
     try {
       parser.visitAllNodesWith(new NodeVisitor() {
+        @Override
+        public void visitEndTag(Tag tag) {
+          result.add(ctx.createNonlocalizableTextFragment(tag.toHtml(true)));
+        }
+
         @Override
         public void visitStringNode(Text string) {
           String val = string.getText();
@@ -80,12 +102,62 @@ public class HtmlPreserver extends DefaultVisitor implements PseudolocalizationM
 
         @Override
         public void visitTag(Tag tag) {
-          result.add(ctx.createNonlocalizableTextFragment(tag.toTagHtml()));
+          // Convert a tag into a sequence of fragments, which always start and
+          // end with a non-localizable text fragment but may have localizable
+          // text fragments in the middle.  For example,
+          //    <input value="Submit">
+          // becomes:
+          //   [ NLTF('<input value="'), LTF('Submit'), NLTF('">') ]
+          
+          // Warning: this is derived from tag.toTagHtml, and may need to be
+          // modified if HtmlParser is updated.
+          @SuppressWarnings("unchecked")
+          Vector<Attribute> attributes = tag.getAttributesEx();
+          int n = attributes.size();
+          StringBuffer buf = new StringBuffer();
+          buf.append("<");
+          String tagName = null;
+          for (int i = 0; i < n; ++i){
+              Attribute attribute = attributes.elementAt(i);
+              if (i == 0) {
+                tagName = attribute.getName();
+              } else if (isLocalizableAttribute(tagName, attribute)) {
+                attribute.getName(buf);
+                attribute.getAssignment(buf);
+                char quote = attribute.getQuote();
+                if (quote != 0) {
+                  buf.append(quote);
+                }
+                if (buf.length() > 0) {
+                  result.add(ctx.createNonlocalizableTextFragment(buf.toString()));
+                }
+                result.add(ctx.createTextFragment(attribute.getValue()));
+                buf = new StringBuffer();
+                if (quote != 0) {
+                  buf.append(quote);
+                }
+                continue;
+              }
+              attribute.toString(buf);
+          }
+          buf.append(">");
+          result.add(ctx.createNonlocalizableTextFragment(buf.toString()));
         }
 
-        @Override
-        public void visitEndTag(Tag tag) {
-          result.add(ctx.createNonlocalizableTextFragment(tag.toHtml(true)));
+        /**
+         * Check if a particular attribute contains localizable content.
+         * 
+         * @param tagName
+         * @param attribute
+         * @return true if the attribute's value is localizable, false otherwise
+         */
+        private boolean isLocalizableAttribute(String tagName, Attribute attribute) {
+          if (!attribute.isValued()) {
+            return false;
+          }
+          String attrName = attribute.getName();
+          return LOCALIZABLE_ATTRIBUTES.contains(attrName)
+              || LOCALIZABLE_ATTRIBUTES.contains(tagName + "/" + attrName);
         }
       });
       ctx.replaceFragment(text, result);

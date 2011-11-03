@@ -54,6 +54,17 @@ public class HtmlPreserverTest extends PseudolocalizationTestCase {
     assertEquals("[loc:Hello ]&#64;[loc: there ]&#x2D;[loc: ]&amp;", msg);
   }
 
+  public void testLocalizedAttributes() throws PseudolocalizationException {
+    String msg = runPipeline(pipeline, "<input value=\" Save \" type=\"submit\">");
+    assertEquals("<input value=\"[loc: Save ]\" type=\"submit\">", msg);
+
+    msg = runPipeline(pipeline, "<input name=\"realname\" value=\"Hi there\" READONLY>");
+    assertEquals("<input name=\"realname\" value=\"[loc:Hi there]\" READONLY>", msg);
+
+    msg = runPipeline(pipeline, "<img alt=\"Logo\" href=\"foo.jpg\"/>");
+    assertEquals("<img alt=\"[loc:Logo]\" href=\"foo.jpg\"/>", msg);
+  }
+
   public void testMissingEndTag() throws PseudolocalizationException {
     String msg = runPipeline(pipeline, "Hello <p>there!");
     assertEquals("[loc:Hello ]<p>[loc:there!]</p>", msg);
