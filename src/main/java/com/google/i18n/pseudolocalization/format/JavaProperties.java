@@ -16,58 +16,16 @@
 package com.google.i18n.pseudolocalization.format;
 
 import com.google.i18n.pseudolocalization.message.Message;
-import com.google.i18n.pseudolocalization.message.MessageFragment;
-import com.google.i18n.pseudolocalization.message.SimpleMessage;
-import com.google.i18n.pseudolocalization.message.SimpleTextFragment;
-import com.google.i18n.pseudolocalization.message.impl.AbstractPlaceholder;
 import com.google.i18n.pseudolocalization.message.impl.IterableTransformer;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JavaProperties implements MessageCatalog {
-
-  static class PropertiesMessage extends SimpleMessage {
-
-    private static List<MessageFragment> parseMessage(String text) {
-      List<MessageFragment> list = new ArrayList<MessageFragment>();
-      // TODO: handle quoting
-      Matcher m = MESSAGE_FORMAT_ARG.matcher(text);
-      int start = 0;
-      while (m.find()) {
-        String plainText = text.substring(start, m.start());
-        start = m.end();
-        if (plainText.length() > 0) {
-          list.add(new SimpleTextFragment(plainText));
-        }
-        list.add(new MessageFormatPlaceholder(m.group()));
-      }
-      String plainText = text.substring(start);
-      if (plainText.length() > 0) {
-        list.add(new SimpleTextFragment(plainText));
-      }
-      return list;
-    }
-
-    private final String key;
-
-    public PropertiesMessage(String key, String text) {
-      super(parseMessage(text));
-      this.key = key;
-    }
-
-    @Override
-    public String getId() {
-      return key;
-    }
-  }
 
   private static class JavaPropertiesReader implements ReadableMessageCatalog {
 
@@ -100,7 +58,7 @@ public class JavaProperties implements MessageCatalog {
           properties.stringPropertyNames())) {
         @Override
         protected Message transform(String val) {
-          return new PropertiesMessage(val, properties.getProperty(val));
+          return new MessageFormatMessage(val, properties.getProperty(val));
         }
       };
     }    
@@ -120,21 +78,7 @@ public class JavaProperties implements MessageCatalog {
     }
 
     public void writeMessage(Message msg) {
-      properties.put(msg.getId(), ((PropertiesMessage) msg).getText());
-    }
-  }
-
-  private static class MessageFormatPlaceholder extends AbstractPlaceholder {
-
-    private final String text;
-
-    public MessageFormatPlaceholder(String text) {
-      this.text = text;
-    }
-
-    @Override
-    public String getTextRepresentation() {
-      return text;
+      properties.put(msg.getId(), ((MessageFormatMessage) msg).getText());
     }
   }
 

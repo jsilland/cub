@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="suits_array">
+    <item>Diamonds</item>
+    <item>Hearts</item>
+    <item>Clubs</item>
+    <item>Spades</item>
+  </string-array>
+</resources>

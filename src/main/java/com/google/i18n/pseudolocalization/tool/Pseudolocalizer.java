@@ -15,6 +15,7 @@
  */
 package com.google.i18n.pseudolocalization.tool;
 
+import com.google.common.base.Joiner;
 import com.google.i18n.pseudolocalization.PseudolocalizationPipeline;
 import com.google.i18n.pseudolocalization.format.FormatRegistry;
 import com.google.i18n.pseudolocalization.format.MessageCatalog;
@@ -50,7 +51,8 @@ public class Pseudolocalizer {
      */
     private static void printUsage() {
       System.err.println("Usage: Pseudolocalizer [--ext=fqcn[,fqcn...]] [--variant=varname|"
-          + "--method=method[,method...] [--type=filetype] [<--interactive|files>]");
+          + "--method=method[,method...] [--type=filetype] [<--interactive|files>]"
+          + "[--out=directory] [--keep_names]");
       System.err.println("filetype: a registered file type, typically the same as the extension");
       System.err.println();
       System.err.println("If given a list of files, output is written to file_variant.ext");
@@ -82,6 +84,7 @@ public class Pseudolocalizer {
       boolean tmpIsInteractive = false;
       String tmpVariant = null;
       String tmpFileType = null;
+      File tmpOutputDirectory = null;
       int argIndex = 0;
       while (argIndex < args.length && args[argIndex].startsWith("--")) {
         String argName = args[argIndex].substring(2);
@@ -89,6 +92,7 @@ public class Pseudolocalizer {
           for (String method : argName.substring(7).split(",")) {
             if (!validMethods.contains(method)) {
               System.err.println("Unknown method '" + method + "'");
+              System.err.println("Valid methods: " + Joiner.on(',').join(validMethods));
               error = true;
               continue;
             }
@@ -116,6 +120,8 @@ public class Pseudolocalizer {
           tmpFileType = argName.substring(5);
         } else if (argName.equals("interactive")) {
           tmpIsInteractive = true;
+        } else if (argName.startsWith("out=")) {
+          tmpOutputDirectory = new File(argName.substring("out=".length()));
         } else {
           System.err.println("Unrecognized option: " + argName);
           error = true;

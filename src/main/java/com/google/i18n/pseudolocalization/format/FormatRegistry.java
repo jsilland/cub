@@ -16,6 +16,9 @@
 package com.google.i18n.pseudolocalization.format;
 
 
+import com.strava.i18n.pseudolocalization.format.AndroidStrings;
+import com.strava.i18n.pseudolocalization.format.MacStrings;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +34,8 @@ public class FormatRegistry {
     synchronized(registryLock) {
       registry = new HashMap<String, Class<? extends MessageCatalog>>();
       registry.put("properties", JavaProperties.class);
+      registry.put("xml", AndroidStrings.class);
+      registry.put("strings", MacStrings.class);
     }
   }
 

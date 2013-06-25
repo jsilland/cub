@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <plurals name="metric_distance">
+    <item quantity="zero">kilometers</item>
+    <item quantity="one">kilometer</item>
+    <item quantity="other">kilometers</item>
+  </plurals>
+</resources>

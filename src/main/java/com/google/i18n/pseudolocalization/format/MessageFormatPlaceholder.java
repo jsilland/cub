@@ -1,5 +1,5 @@
-/*
- * Copyright 2011 Google Inc.
+/**
+ * Copyright 2013 Strava Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,29 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.i18n.pseudolocalization.message;
 
-/**
- * A {@link TextFragment} that simply stores the localizable text.
- */
-public class SimpleTextFragment implements TextFragment {
+package com.google.i18n.pseudolocalization.format;
+
+import com.google.i18n.pseudolocalization.message.impl.AbstractPlaceholder;
+
+class MessageFormatPlaceholder extends AbstractPlaceholder {
 
   private final String text;
 
-  public SimpleTextFragment(String text) {
+  public MessageFormatPlaceholder(String text) {
     this.text = text;
   }
 
-  public String getText() {
+  @Override
+  public String getTextRepresentation() {
     return text;
-  }
-
-  public void accept(VisitorContext ctx, MessageFragmentVisitor mfv) {
-    mfv.visitTextFragment(ctx, this);
   }
 
   @Override
   public String toString() {
-    return getText();
+    return getTextRepresentation();
   }
 }

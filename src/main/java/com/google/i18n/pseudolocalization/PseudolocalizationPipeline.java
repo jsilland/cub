@@ -141,7 +141,7 @@ public class PseudolocalizationPipeline {
     FakeBidi.register();
     HtmlPreserver.register();
 
-    // regiter known pseudolocalization variants
+    // register known pseudolocalization variants
     registerVariant("psaccent", new String[] { "accents", "expand", "brackets" });
     registerVariant("psbidi", new String[] { "fakebidi" });
   }

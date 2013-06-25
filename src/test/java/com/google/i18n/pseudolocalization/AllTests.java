@@ -21,6 +21,7 @@ import com.google.i18n.pseudolocalization.methods.ExpanderTest;
 import com.google.i18n.pseudolocalization.methods.FakeBidiTest;
 import com.google.i18n.pseudolocalization.methods.HtmlPreserverTest;
 
+import com.strava.i18n.pseudolocalization.format.AndroidStrings;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

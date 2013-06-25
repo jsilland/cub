@@ -1,0 +1,45 @@
+/* Alert Title Terms of Use */
+"NEW_ACTIVITY_ACCEPT_TERMS" = "Accept Terms";
+/* Alert Subtitle Terms of Use */
+"NEW_ACTIVITY_TERMS_OF_USE" = "Always use your best judgement about the safety of road conditions, follow traffic laws, and do not enter information into, or be distracted by, this device while in motion or in any potentially unsafe area. Strava is not liable for any injuries or death arising from the use or misuse of this application. For more on using this application, go to http://strava.com/mobile";
+/* Alert Button Accept */
+"NEW_ACTIVITY_I_ACCEPT" = "I Accept";
+
+"NEW_ACTIVITY_WEATHER_CURRENT_WITH_CELSIUS_FORMAT" = "Right Now: %@C, %@";
+"NEW_ACTIVITY_WEATHER_CURRENT_WITH_FAHRENHEIT_FORMAT" = "Right Now: %@F, %@";
+"NEW_ACTIVITY_WEATHER_CURRENT_FORMAT" = "Right Now: %@";
+"NEW_ACTIVITY_WEATHER_MINUTELY_FORMAT" = "Next Hour: %@";
+"NEW_ACTIVITY_WEATHER_HOURLY_FORMAT" = "Next 24 Hours: %@";
+"NEW_ACTIVITY_WEATHER_DAILY_FORMAT" = "Next 7 Days: %@";
+
+/* Alert Button Cancel */
+"ALERT_CANCEL" = "Cancel";
+/* Open External URL alert OK button */
+"ALERT_OK" = "OK";
+/* Alert Button Open */
+"ALERT_OPEN" = "Open";
+
+/* Cancel button title */
+"BUTTON_CANCEL" = "Cancel";
+/* Cancel action sheet button title */
+"ACTION_SHEET_CANCEL" = "Cancel";
+
+/* Alert Button Discard */
+"NEW_ACTIVITY_DISCARD" = "Discard";
+
+/* Alert Title Incomplete Activity */
+"NEW_ACTIVITY_INCOMPLETE_ACTIVITY" = "Incomplete Activity";
+
+/* Alert Subtitle Incomplete Activity */
+"NEW_ACTIVITY_INCOMPLETE_ACTIVITY_CONTENT" = "The last Activity looks like it was not finished - would you like to continue the Activity or finish it?";
+"NEW_ACTIVITY_INCOMPLETE_ACTIVITY_NO_RESUME_CONTENT" = "The last Activity looks like it was not finished.";
+
+"NEW_ACTIVITY_SPLIT_PACE_LABEL" = "SPLIT PACE";
+"NEW_ACTIVITY_AVG_SPEED_LABEL" = "AVG SPEED";
+
+/* Accessibility Record Button */
+"NEW_ACTIVITY_RECORD_BUTTON_RECORD" = "Record";
+"NEW_ACTIVITY_RECORD_BUTTON_PAUSE" = "Pause";
+"NEW_ACTIVITY_RECORD_BUTTON_HINT" = "Toggles Record and Pause";
+
+"NEW_ACTIVITY_TIME_FORMAT" = "%02d:%02d:%02d";

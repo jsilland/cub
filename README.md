@@ -35,14 +35,21 @@ standardized. A variant subtag of psaccent corresponds to accenter, expander,
 and brackets (in that order), and a variant subtag of psbidi corresponds to
 fakebidi.
 
-Initially this project consists of just a library to be used by other tools,
-but eventually it will provide a command-line tool for generating
-pseudolocalized message files that can be used just like real translated files
-in your build process. Integration with GWT is also planned.
+Usage
+=====
 
+To pseudo-localize a Macintosh or iPhone `.strings` file:
 
-Additional Credits:
-===================
+    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,
+brackets --type=strings <path to Localizable.string>
+
+To pseudo-localize an Android `.xml` file:
+
+    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,
+brackets --type=xml <path to strings.xml>
+
+Additional Credits
+==================
 The original implementations this library is based upon were written by
 Jerome Flesch while an intern at Google. This project is a fork of Google's
 [pseudolocalization-tool](https://code.google.com/p/pseudolocalization-tool).
