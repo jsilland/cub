@@ -40,13 +40,11 @@ Usage
 
 To pseudo-localize a Macintosh or iPhone `.strings` file:
 
-    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,
-brackets --type=strings <path to Localizable.string>
+    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=strings <path to Localizable.string>
 
 To pseudo-localize an Android `.xml` file:
 
-    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,
-brackets --type=xml <path to strings.xml>
+    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=xml <path to strings.xml>
 
 Additional Credits
 ==================
