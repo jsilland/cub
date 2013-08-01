@@ -41,7 +41,7 @@ public class MacStrings implements MessageCatalog {
     return CharStreams.readLines(reader, new LineProcessor<ReadableMessageCatalog>() {
 
       private final Pattern MAC_STRING = Pattern.compile(
-          "^(\\s)?\"([A-Z_]+)\"(\\s)?=(\\s)?\"(.+)\";(\\s)?$");
+          "^(\\s)?\"([A-Z1-9_]+)\"(\\s)?=(\\s)?\"(.+)\";(\\s)?$");
 
       @Override
       public boolean processLine(String line) throws IOException {

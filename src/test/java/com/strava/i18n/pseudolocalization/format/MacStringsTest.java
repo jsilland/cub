@@ -38,7 +38,7 @@ public class MacStringsTest extends TestCase {
     for (Message message : catalog.readMessages()) {
       messages.put(message.getId(), message);
     }
-    Assert.assertEquals(24, messages.size());
+    Assert.assertEquals(25, messages.size());
   }
 
   public void testWriteTo() throws Exception {

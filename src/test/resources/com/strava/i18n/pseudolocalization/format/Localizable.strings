@@ -43,3 +43,5 @@
 "NEW_ACTIVITY_RECORD_BUTTON_HINT" = "Toggles Record and Pause";
 
 "NEW_ACTIVITY_TIME_FORMAT" = "%02d:%02d:%02d";
+
+"SEGMENT_PERSONAL_RANK_3RD" = "Third Best Time";
