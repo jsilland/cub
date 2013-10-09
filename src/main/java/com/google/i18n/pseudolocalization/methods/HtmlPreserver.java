@@ -59,6 +59,7 @@ public class HtmlPreserver extends DefaultVisitor implements PseudolocalizationM
     // TODO: some automated way of generating this list
     LOCALIZABLE_ATTRIBUTES.add("alt");
     LOCALIZABLE_ATTRIBUTES.add("title");
+    //LOCALIZABLE_ATTRIBUTES.add("a/href");
     LOCALIZABLE_ATTRIBUTES.add("button/value");
     LOCALIZABLE_ATTRIBUTES.add("input/value");
     LOCALIZABLE_ATTRIBUTES.add("option/label");

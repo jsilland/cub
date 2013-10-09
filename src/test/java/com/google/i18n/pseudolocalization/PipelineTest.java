@@ -18,6 +18,8 @@ package com.google.i18n.pseudolocalization;
 import com.google.i18n.pseudolocalization.message.Message;
 import com.google.i18n.pseudolocalization.message.MessageFragmentVisitor;
 import com.google.i18n.pseudolocalization.message.VisitorContext;
+import com.strava.i18n.pseudolocalization.format.ToStringVisitor;
+import com.strava.i18n.pseudolocalization.format.YamlMessage;
 
 /**
  * Test for pseudolocalization pipeline infrastructure.

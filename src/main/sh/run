@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -jar target/cub-1.0-SNAPSHOT.jar --method=expand,accents,brackets $*

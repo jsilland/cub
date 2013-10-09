@@ -61,8 +61,8 @@ public class HtmlPreserverTest extends PseudolocalizationTestCase {
     msg = runPipeline(pipeline, "<input name=\"realname\" value=\"Hi there\" READONLY>");
     assertEquals("<input name=\"realname\" value=\"[loc:Hi there]\" READONLY>", msg);
 
-    msg = runPipeline(pipeline, "<img alt=\"Logo\" href=\"foo.jpg\"/>");
-    assertEquals("<img alt=\"[loc:Logo]\" href=\"foo.jpg\"/>", msg);
+    msg = runPipeline(pipeline, "<img alt=\"Logo\" src=\"foo.jpg\"/>");
+    assertEquals("<img alt=\"[loc:Logo]\" src=\"foo.jpg\"/>", msg);
   }
 
   public void testMissingEndTag() throws PseudolocalizationException {

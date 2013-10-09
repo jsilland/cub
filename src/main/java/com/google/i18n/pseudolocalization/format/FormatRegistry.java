@@ -18,6 +18,7 @@ package com.google.i18n.pseudolocalization.format;
 
 import com.strava.i18n.pseudolocalization.format.AndroidStrings;
 import com.strava.i18n.pseudolocalization.format.MacStrings;
+import com.strava.i18n.pseudolocalization.format.YamlStrings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class FormatRegistry {
       registry.put("properties", JavaProperties.class);
       registry.put("xml", AndroidStrings.class);
       registry.put("strings", MacStrings.class);
+      registry.put("yml", YamlStrings.class);
     }
   }
 

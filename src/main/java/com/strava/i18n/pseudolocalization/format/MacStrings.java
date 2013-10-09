@@ -18,7 +18,6 @@ package com.strava.i18n.pseudolocalization.format;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
-import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import com.google.common.io.LineProcessor;
 import com.google.i18n.pseudolocalization.format.MessageCatalog;

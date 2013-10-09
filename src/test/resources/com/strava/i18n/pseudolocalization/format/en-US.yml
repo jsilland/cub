@@ -1,0 +1,43 @@
+en-US:
+  mailer:
+    from: "-Your friends at Strava"
+    footer: "&copy; %{year} Strava. All rights reserved. | 500 3rd Street #110 | San Francisco CA 94107. Please do not reply to this email."
+    footer_text: "Copyright %{year} Strava. All rights reserved. | 500 3rd Street #110 | San Francisco CA 94107. Please do not reply to this email."
+    greeting: "Hey %{receiver},"
+    unsubscribe: "If you no longer wish to hear from us, you can change your"
+    unsubscribe_link: "preferences here"
+    go_hard: "Go hard, be safe, and have fun."
+    standing_for: "This is what we stand for."
+    unit:
+      miles: "miles"
+      kilometers: "kilometers"
+    athletes:
+      accepted_follower_request:
+        subject: "You are now following %{following}"
+        has_accepted_html: "%{accepter} has accepted your follow request. Good stuff!"
+        now_you_can_check_m: "Now you can check out what he has been up to and see how you compare."
+        now_you_can_check_f: "Now you can check out what she has been up to and see how you compare."
+        have_fun: "Have fun!"
+      android_premium:
+        greeting: "Hey %{first_name},"
+        congrats: "Congratulations! As a Strava Premium member you can now enjoy the following features:"
+        filtered_leaderboards: "Filtered Leaderboards - see where you rank among athletes in your own age and weight class"
+        detailed_hrz: "Detailed Heart Rate Zone Analysis - dial in to your training and goal"
+        suffer_score: "Suffer Score - determine exactly how hard you’re riding and running"
+        detailed_power_analysis: "Detailed Power and Pace Analysis - gauge your effort and maximize the efficiency of your training"
+        advanced_comparison: "Advanced Segment Effort Comparison – compare your efforts and see how you’re tackling the same climbs or tricky sections of road or trail over time.  Currently only available for Android"
+        to_get_the_most_html: "To get the most out of these enhancements, visit the <a href='http://www.zephyranywherestore.com/info/Strava'>Zephyr Store</a> to purchase a Bluetooth Heart Rate Monitor directly from the Strava App.  Tap the heart rate icon in any activity and choose Learn More."
+        you_can_use: "You can use these features on your Android and on the web"
+        enjoy: "Enjoy!"
+      athlete_requested_to_join_club:
+        subject: "%{requester_name} requested to join %{club_name} on Strava"
+        club_growing: "Your club is growing!"
+        has_requested_html: "%{requester_link} has requested to join %{club_name}."
+        grant_html: "%{go_to_members_link} and grant %{requester_display_name} access to your Club."
+        accept: "Accept the request"
+        you_can_choose: "You can choose to deny this request from the members section of your Club page."
+        keep_it_up: "Keep it up,"
+      club_comment:
+        subject: "%{commenter} has commented on the %{club} page"
+        has_commented_html: "%{athlete} has commented on the <a href='%{club_url}'>%{thread_name}</a> page."
+        respond_html: "Click to <a href='%{club_url}'>respond</a> and jump in on the conversation."

@@ -18,7 +18,7 @@ package com.strava.i18n.pseudolocalization.format;
 
 import com.google.i18n.pseudolocalization.message.*;
 
-class ToStringFragmentVisitor implements MessageFragmentVisitor {
+public class ToStringFragmentVisitor implements MessageFragmentVisitor {
 
   private final StringBuilder builder = new StringBuilder();
 

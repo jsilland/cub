@@ -21,7 +21,7 @@ import com.google.i18n.pseudolocalization.message.MessageFragmentVisitor;
 import com.google.i18n.pseudolocalization.message.MessageVisitor;
 import com.google.i18n.pseudolocalization.message.VisitorContext;
 
-class ToStringVisitor implements MessageVisitor {
+public class ToStringVisitor implements MessageVisitor {
 
   public final ToStringFragmentVisitor fragmentVisitor = new ToStringFragmentVisitor();
 
