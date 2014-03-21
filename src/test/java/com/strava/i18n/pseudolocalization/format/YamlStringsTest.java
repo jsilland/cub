@@ -48,7 +48,5 @@ public class YamlStringsTest extends TestCase {
     }
 
     catalog.close();
-
-    System.out.println(new String(output.toByteArray(), Charsets.UTF_8));
   }
 }
