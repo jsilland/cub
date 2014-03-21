@@ -15,6 +15,7 @@
  */
 package com.google.i18n.pseudolocalization;
 
+import com.strava.i18n.pseudolocalization.methods.PigLatin;
 import com.google.i18n.pseudolocalization.message.Message;
 import com.google.i18n.pseudolocalization.message.SimpleMessage;
 import com.google.i18n.pseudolocalization.methods.Accenter;
@@ -140,9 +141,10 @@ public class PseudolocalizationPipeline {
     Expander.register();
     FakeBidi.register();
     HtmlPreserver.register();
+    PigLatin.register();
 
     // register known pseudolocalization variants
-    registerVariant("psaccent", new String[] { "accents", "expand", "brackets" });
+    registerVariant("psaccent", new String[]{"accents", "expand", "brackets"});
     registerVariant("psbidi", new String[] { "fakebidi" });
   }
 
