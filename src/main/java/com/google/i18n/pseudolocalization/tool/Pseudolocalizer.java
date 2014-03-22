@@ -52,7 +52,7 @@ public class Pseudolocalizer {
     private static void printUsage() {
       System.err.println("Usage: Pseudolocalizer [--ext=fqcn[,fqcn...]] [--variant=varname|"
           + "--method=method[,method...] [--type=filetype] [<--interactive|files>]"
-          + "[--out=directory] [--keep_names]");
+          + "[--out=directory] [--keep_names] [--suffix=suffix]");
       System.err.println("filetype: a registered file type, typically the same as the extension");
       System.err.println();
       System.err.println("If given a list of files, output is written to file_variant.ext");
@@ -72,6 +72,8 @@ public class Pseudolocalizer {
 
     private final String variant;
 
+    private final String suffix;
+
     /**
      * Process command-line arguments.
      * 
@@ -83,6 +85,7 @@ public class Pseudolocalizer {
       boolean error = false;
       boolean tmpIsInteractive = false;
       String tmpVariant = null;
+      String tmpSuffix = "_pseudo";
       String tmpFileType = null;
       File tmpOutputDirectory = null;
       int argIndex = 0;
@@ -103,6 +106,8 @@ public class Pseudolocalizer {
             throw new RuntimeException("More than one variant supplied");
           }
           tmpVariant = argName.substring(8);
+        } else if (argName.startsWith("suffix=")) {
+          tmpSuffix = argName.substring(7);
         } else if (argName.startsWith("ext=")) {
           for (String className : argName.substring(4).split(",")) {
             try {
@@ -140,6 +145,7 @@ public class Pseudolocalizer {
       fileType = tmpFileType;
       variant = tmpVariant;
       isInteractive = tmpIsInteractive;
+      suffix = tmpSuffix;
 
       if (error || (isInteractive && argIndex < args.length)) {
         printUsage();
@@ -203,6 +209,10 @@ public class Pseudolocalizer {
     public boolean isInteractive() {
       return isInteractive;
     }
+
+    public String getSuffix() {
+      return suffix;
+    }
   }
 
   /**
@@ -239,7 +249,7 @@ public class Pseudolocalizer {
     // get the suffix to use for output file names
     String suffix = arguments.getVariant();
     if (suffix == null) {
-      suffix = "_pseudo";
+      suffix = arguments.getSuffix();
     } else {
       suffix = "_" + suffix;
     }
