@@ -35,6 +35,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a message in a YAML file.
+ *
+ * @author Julien Silland (julien@strava.com)
+ */
 public class YamlMessage extends SimpleMessage {
 
   private static class YamlPlaceholder extends AbstractPlaceholder {

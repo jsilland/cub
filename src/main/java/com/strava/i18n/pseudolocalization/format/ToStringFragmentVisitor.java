@@ -18,6 +18,12 @@ package com.strava.i18n.pseudolocalization.format;
 
 import com.google.i18n.pseudolocalization.message.*;
 
+/**
+ * Implementation of {@link com.google.i18n.pseudolocalization.message.MessageFragmentVisitor}
+ * that is able to return a string representation of the message it visits.
+ *
+ * @author Julien Silland (julien@strava.com)
+ */
 public class ToStringFragmentVisitor implements MessageFragmentVisitor {
 
   private final StringBuilder builder = new StringBuilder();
@@ -43,6 +49,9 @@ public class ToStringFragmentVisitor implements MessageFragmentVisitor {
     return null;
   }
 
+  /**
+   * Returns the string representation of the visited message
+   */
   public String getStringResult() {
     return builder.toString();
   }

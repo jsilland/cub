@@ -30,6 +30,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents an Apple {@code .strings} file.
+ *
+ * @author Julien Silland (julien@strava.com)
+ */
 public class MacStrings implements MessageCatalog {
 
   @Override

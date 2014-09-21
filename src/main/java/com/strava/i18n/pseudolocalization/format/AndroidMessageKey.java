@@ -28,6 +28,8 @@ import java.util.Map;
 /**
  * Represents the key of an Android message, in which various bits of data are encoded (name,
  * plural form, array index, etc...).
+ *
+ * @author Julien Silland (julien@strava.com)
  */
 public class AndroidMessageKey {
 
@@ -35,6 +37,9 @@ public class AndroidMessageKey {
   private static final Joiner SLASH_JOINER = Joiner.on('/').skipNulls();
   private static final Splitter SLASH_SPLITTER = Splitter.on('/').omitEmptyStrings();
 
+  /**
+   * Enumeration of the type of messages found in an Android XML file.
+   */
   public static enum AndroidMessageType {
     STRING("string"), ARRAY("array"), PLURAL("plural");
 
@@ -51,10 +56,18 @@ public class AndroidMessageKey {
       this.value = value;
     }
 
+    /**
+     * Returns the value associated with this instance.
+     */
     private String getValue() {
       return value;
     }
 
+    /**
+     * Looks up an instance of this enumeration by value.
+     *
+     * @param value the value to look up
+     */
     private static AndroidMessageType of(String value) {
        if (VALUES.containsKey(value)) {
          return VALUES.get(value);
@@ -63,6 +76,9 @@ public class AndroidMessageKey {
     }
   }
 
+  /**
+   * Enumeration of the plural forms supported by Android.
+   */
   public static enum PluralForm {
     ZERO("zero"), ONE("one"), TWO("two"), FEW("few"), MANY("many"), OTHER("other");
 
@@ -78,10 +94,18 @@ public class AndroidMessageKey {
       this.value = value;
     }
 
+    /**
+     * Returns the value associated with this instance.
+     */
     public String getValue() {
       return value;
     }
 
+    /**
+     * Looks up an instance of this enumeration by value.
+     *
+     * @param value the value to look up
+     */
     public static PluralForm of(String value) {
       if (VALUES.containsKey(value)) {
         return VALUES.get(value);
@@ -108,14 +132,31 @@ public class AndroidMessageKey {
     return null;
   }
 
+  /**
+   * Returns a message key representing a simple message
+   *
+   * @param key the key of the message in the XML file
+   */
   public static AndroidMessageKey forSimpleMessage(String key) {
     return new AndroidMessageKey(AndroidMessageType.STRING, key, null, null);
   }
 
+  /**
+   * Returns a message key representing an item in an array
+   *
+   * @param key the key of the array in the XML file
+   * @param index the index of the item within the array
+   */
   public static AndroidMessageKey forArrayPosition(String key, int index) {
     return new AndroidMessageKey(AndroidMessageType.ARRAY, key, index, null);
   }
 
+  /**
+   * Returns a message key representing a plural form
+   *
+   * @param key the key of the message in the XML file
+   * @param form the plural form represented of the message
+   */
   public static AndroidMessageKey forPlural(String key, PluralForm form) {
     return new AndroidMessageKey(AndroidMessageType.PLURAL, key, null, form);
   }
@@ -133,14 +174,25 @@ public class AndroidMessageKey {
     this.pluralForm = pluralForm;
   }
 
+  /**
+   * Returns the type of this key
+   */
   public AndroidMessageType getType() {
     return type;
   }
 
+  /**
+   * Returns the key of this message in the XML file
+   */
   public String getKey() {
     return key;
   }
 
+  /**
+   * Returns the index of this message withing its array
+   *
+   * @throws java.lang.IllegalStateException if this message key is not that of an array item
+   */
   public Integer getIndex() {
     if (type != AndroidMessageType.ARRAY) {
       throw new IllegalStateException();
@@ -148,6 +200,11 @@ public class AndroidMessageKey {
     return index;
   }
 
+  /**
+   * Returns the plural form of this message
+   *
+   * @throws java.lang.IllegalStateException if this message key is not that of a plural message
+   */
   public PluralForm getPluralForm() {
     if (type != AndroidMessageType.PLURAL) {
       throw new IllegalStateException();

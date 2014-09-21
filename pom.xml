@@ -9,7 +9,7 @@
   <packaging>jar</packaging>
 
   <name>cub</name>
-  <url>http://maven.apache.org</url>
+  <url>http://soliton.io/cub</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,6 +34,32 @@
                 </transformer>
               </transformers>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <links>
+            <link>http://docs.oracle.com/javase/7/docs/api</link>
+            <link>
+              http://docs.guava-libraries.googlecode.com/git-history/release/javadoc
+            </link>
+          </links>
+          <stylesheet>java</stylesheet>
+          <bootclasspath>${sun.boot.class.path}</bootclasspath>
+          <additionalJOption>-J-Xmx1024m</additionalJOption>
+          <detectJavaApiLink>true</detectJavaApiLink>
+          <detectLinks>true</detectLinks>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>

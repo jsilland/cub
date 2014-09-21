@@ -27,6 +27,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a message in an Apple {@code .strings} file.
+ *
+ * @author Julien Silland (julien@strava.com)
+ */
 public class MacMessage extends SimpleMessage {
 
   /**
@@ -78,7 +83,7 @@ public class MacMessage extends SimpleMessage {
   private final String key;
 
   /**
-   * Exhaustive contructor.
+   * Exhaustive constructor.
    *
    * @param key the message's identifier.
    * @param text the message's text.

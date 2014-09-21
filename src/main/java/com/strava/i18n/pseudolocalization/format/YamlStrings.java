@@ -32,6 +32,11 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Represents a set of messages in a YAML file.
+ *
+ * @author Julien Silland (julien@strava.com)
+ */
 public class YamlStrings implements MessageCatalog {
 
   Joiner DOT = Joiner.on('.');

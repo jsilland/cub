@@ -29,6 +29,8 @@ import java.util.regex.Pattern;
 
 /**
  * A message supporting {@link java.util.Formatter}-like placeholders.
+ *
+ * @author Julien Silland (julien@strava.com)
  */
 public class FormattedMessage extends SimpleMessage {
 
@@ -75,6 +77,12 @@ public class FormattedMessage extends SimpleMessage {
 
   private final String key;
 
+  /**
+   * Constructs an instance of this class from a plain string
+   *
+   * @param key the key of the message
+   * @param text the content of the message
+   */
   public FormattedMessage(String key, String text) {
     super(parseMessage(text));
     this.key = key;

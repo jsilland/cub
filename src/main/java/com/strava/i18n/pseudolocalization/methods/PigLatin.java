@@ -22,10 +22,18 @@ import com.google.i18n.pseudolocalization.PseudolocalizationPipeline;
 import com.google.i18n.pseudolocalization.message.*;
 import com.ibm.icu.text.BreakIterator;
 
+/**
+ * A pseudolocalization method that outputs English messages as their pig latin equivalent.
+ *
+ * @author Julien Silland (julien@strava.com)
+ */
 public class PigLatin extends DefaultVisitor implements PseudolocalizationMethod {
 
   private static final CharMatcher NON_LETTERS = CharMatcher.JAVA_LETTER.negate();
 
+  /**
+   * Registers this method in the global registry of pseudolocalization methods
+   */
   public static void register() {
     PseudolocalizationPipeline.registerMethodClass("piglatin", PigLatin.class);
   }
@@ -52,6 +60,11 @@ public class PigLatin extends DefaultVisitor implements PseudolocalizationMethod
     context.replaceFragment(fragment, new SimpleTextFragment(stringBuilder.toString()));
   }
 
+  /**
+   * Returns the translation of a word in pig latin
+   *
+   * @param word the word to translate
+   */
   public static final String pigLatinify(String word) {
     if (NON_LETTERS.matchesAllOf(word)) {
       return word;
@@ -60,6 +73,11 @@ public class PigLatin extends DefaultVisitor implements PseudolocalizationMethod
     return word.substring(split) + word.substring(0, split) + "ay";
   }
 
+  /**
+   * Returns the index of the first vowel in the given word
+   *
+   * @param word the word in which to find a vowel
+   */
   private static int firstVowel(String word) {
     word = word.toLowerCase();
     for (int i = 0; i < word.length(); i++) {
