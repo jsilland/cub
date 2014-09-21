@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cub by jsilland</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Cub</h1>
+        <p class="header">Pseudolocalization library for Java</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/jsilland/cub/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/jsilland/cub/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/jsilland/cub">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/jsilland">jsilland</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="cub" class="anchor" href="#cub"><span class="octicon octicon-link"></span></a>cub</h1>
+
+<p>This library provides a tool and an API to perform pseudolocalization.
+Pseudolocalization generates a fake translation of messages of a program,
+which helps to highlight weaknesses and bugs in the original program regarding
+localization.</p>
+
+<p>For instance, you may transform a message such as <code>pseudolocalization</code> into its accented form <code>þšéûðöļöçåļîžåţîöñ</code>, in order to easily spot which messages in your UI are not externalized or translated yet.</p>
+
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>To pseudo-localize a Macintosh or iPhone <code>.strings</code> file:</p>
+
+<div class="highlight highlight-sh"><pre>mvn clean package
+java -jar target/cub-1.0-SNAPSHOT.jar --method<span class="o">=</span>html,accents,brackets --type<span class="o">=</span>strings &lt;path to Localizable.string&gt;
+</pre></div>
+
+<p>To pseudo-localize an Android <code>.xml</code> file:</p>
+
+<div class="highlight highlight-sh"><pre>mvn clean package
+java -jar target/cub-1.0-SNAPSHOT.jar --method<span class="o">=</span>html,accents,brackets --type<span class="o">=</span>xml &lt;path to strings.xml&gt;
+</pre></div>
+
+<h1>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h1>
+
+<p>The library includes a structured message API to allow it to be used for
+complex multi-part messages, and includes the following pseudolocalization
+methods:</p>
+
+<ul>
+<li>accenter: replaces US-ASCII characters with accented versions, to make
+it obvious if parts of the output are hard-coded in the program and can't
+be localized</li>
+<li>brackets: adds [brackets] around each message, to show where messages
+have been concatenated together. This is a localization problem because
+some languages may need to reorder phrases or the translation may change
+depending on what is around it.</li>
+<li>expander: makes each message longer, to show where the UI doesn't give
+enough space for languages that result in longer strings, and either
+wraps awkwardly or truncates.</li>
+<li>fakebidi: produces fake Right-to-Left text, using the original source
+text and wrapping LTR text with RTL markers, so that it renders as if it
+were RTL text but is still mostly readable to someone who doesn't speak
+Arabic or Hebrew.</li>
+<li>piglatin: translates English messages into <a href="http://en.wikipedia.org/wiki/Pig_Latin">Pig Latin</a>
+</li>
+</ul><p>These methods can be combined in any order and with user-written methods. In
+addition, HTML tags can optionally be preserved (it is not recommended to give
+them to the translator, but especially simple tags show up in translatable
+text frequently).</p>
+
+<p>These can also be accessed via locale variant subtags, which we hope to get
+standardized. A variant subtag of psaccent corresponds to accenter, expander,
+and brackets (in that order), and a variant subtag of psbidi corresponds to
+fakebidi.</p>
+
+<h1>
+<a name="supported-formats" class="anchor" href="#supported-formats"><span class="octicon octicon-link"></span></a>Supported formats</h1>
+
+<p>This library supports Java properties files, Android XML files, iOS and Mac Strings files, YAML.</p>
+
+<h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>This project is licensed as per the terms of the Apache 2 License.</p>
+
+<h1>
+<a name="additional-credits" class="anchor" href="#additional-credits"><span class="octicon octicon-link"></span></a>Additional Credits</h1>
+
+<p>This project is a fork of Google's <a href="https://code.google.com/p/pseudolocalization-tool">pseudolocalization-tool</a>, which was originally written by <a href="https://github.com/jflesch">@jflesch</a> and open-sourced by <a href="https://github.com/andyst">@andyst</a>.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
