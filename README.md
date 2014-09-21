@@ -28,6 +28,8 @@ java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=xml 
 API
 ===
 
+See the full [Javadoc](http://soliton.io/cub/docs/) for this library.
+
 The library includes a structured message API to allow it to be used for
 complex multi-part messages, and includes the following pseudolocalization
 methods:
