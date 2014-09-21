@@ -6,6 +6,28 @@ Pseudolocalization generates a fake translation of messages of a program,
 which helps to highlight weaknesses and bugs in the original program regarding
 localization.
 
+For instance, you may transform a message such as `pseudolocalization` into its accented form `þšéûðöļöçåļîžåţîöñ`, in order to easily spot which messages in your UI are not externalized or translated yet.
+
+Usage
+=====
+
+To pseudo-localize a Macintosh or iPhone `.strings` file:
+
+```sh
+mvn clean package
+java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=strings <path to Localizable.string>
+```
+
+To pseudo-localize an Android `.xml` file:
+
+```sh
+mvn clean package
+java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=xml <path to strings.xml>
+```
+
+API
+===
+
 The library includes a structured message API to allow it to be used for
 complex multi-part messages, and includes the following pseudolocalization
 methods:
@@ -24,6 +46,7 @@ methods:
     text and wrapping LTR text with RTL markers, so that it renders as if it
     were RTL text but is still mostly readable to someone who doesn't speak
     Arabic or Hebrew.
+  - piglatin: translates English messages into [Pig Latin](http://en.wikipedia.org/wiki/Pig_Latin)
 
 These methods can be combined in any order and with user-written methods. In
 addition, HTML tags can optionally be preserved (it is not recommended to give
@@ -35,19 +58,17 @@ standardized. A variant subtag of psaccent corresponds to accenter, expander,
 and brackets (in that order), and a variant subtag of psbidi corresponds to
 fakebidi.
 
-Usage
-=====
+Supported formats
+=================
 
-To pseudo-localize a Macintosh or iPhone `.strings` file:
+This library supports Java properties files, Android XML files, iOS and Mac Strings files, YAML.
 
-    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=strings <path to Localizable.string>
+License
+=======
 
-To pseudo-localize an Android `.xml` file:
-
-    mvn clean package && java -jar target/cub-1.0-SNAPSHOT.jar --method=html,accents,brackets --type=xml <path to strings.xml>
+This project is licensed as per the terms of the Apache 2 License.
 
 Additional Credits
 ==================
-The original implementations this library is based upon were written by
-Jerome Flesch while an intern at Google. This project is a fork of Google's
-[pseudolocalization-tool](https://code.google.com/p/pseudolocalization-tool).
+
+This project is a fork of Google's [pseudolocalization-tool](https://code.google.com/p/pseudolocalization-tool), which was originally written by [@jflesch](https://github.com/jflesch) and open-sourced by [@andyst](https://github.com/andyst).
