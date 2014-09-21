@@ -1,0 +1,8 @@
+com.google.i18n.pseudolocalization
+com.google.i18n.pseudolocalization.format
+com.google.i18n.pseudolocalization.message
+com.google.i18n.pseudolocalization.message.impl
+com.google.i18n.pseudolocalization.methods
+com.google.i18n.pseudolocalization.tool
+com.strava.i18n.pseudolocalization.format
+com.strava.i18n.pseudolocalization.methods
